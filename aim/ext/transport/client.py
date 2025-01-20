@@ -44,8 +44,8 @@ class Client:
         self._remote_path = remote_path
 
         self._http_protocol = 'https://'
-        self._ws_protocol = 'ws://'
-        self.request_headers = json.loads(os.getenv(AIM_CLIENT_REQUEST_HEADERS)) if os.getenv(AIM_CLIENT_REQUEST_HEADERS) else {}
+        self._ws_protocol = 'wss://'
+        self.request_headers = json.loads(os.getenv('AIM_CLIENT_REQUEST_HEADERS')) if os.getenv('AIM_CLIENT_REQUEST_HEADERS') else {}
 
         self.ssl_certfile = os.getenv(AIM_CLIENT_SSL_CERTIFICATES_FILE)
         self.ssl_context = None
