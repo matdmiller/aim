@@ -43,7 +43,7 @@ class Client:
             remote_path = remote_path[:-1]
         self._remote_path = remote_path
 
-        self._http_protocol = 'http://'
+        self._http_protocol = 'https://'
         self._ws_protocol = 'ws://'
         self.request_headers = json.loads(os.getenv(AIM_CLIENT_REQUEST_HEADERS)) if os.getenv(AIM_CLIENT_REQUEST_HEADERS) else {}
 
@@ -73,16 +73,16 @@ class Client:
         self._ws = None
 
     def protocol_probe(self):
-        endpoint = f'http://{self.remote_path}/status/'
-        try:
-            response = requests.get(endpoint, headers=self.request_headers, timeout=10)
-            if response.status_code == 200:
-                if response.url.startswith('https://'):
-                    self._http_protocol = 'https://'
-                    self._ws_protocol = 'wss://'
-                    return
-        except Exception:
-            pass
+        # endpoint = f'http://{self.remote_path}/status/'
+        # try:
+        #     response = requests.get(endpoint, headers=self.request_headers, timeout=10)
+        #     if response.status_code == 200:
+        #         if response.url.startswith('https://'):
+        #             self._http_protocol = 'https://'
+        #             self._ws_protocol = 'wss://'
+        #             return
+        # except Exception:
+        #     pass
 
         endpoint = f'https://{self.remote_path}/status/'
         try:
