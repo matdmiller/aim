@@ -1,4 +1,5 @@
 import base64
+import json
 import logging
 import os
 import ssl
@@ -44,7 +45,7 @@ class Client:
 
         self._http_protocol = 'http://'
         self._ws_protocol = 'ws://'
-        self.request_headers = {}
+        self.request_headers = json.loads(os.getenv(AIM_CLIENT_REQUEST_HEADERS)) if os.getenv(AIM_CLIENT_REQUEST_HEADERS) else {}
 
         self.ssl_certfile = os.getenv(AIM_CLIENT_SSL_CERTIFICATES_FILE)
         self.ssl_context = None
