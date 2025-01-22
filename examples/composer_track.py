@@ -107,13 +107,14 @@ def main():
             loss_fn=torch.nn.CrossEntropyLoss()
         )
 
-        # Initialize our Aim logger
+        # Initialize our Aim logger with system tracking disabled
         print("Setting up Aim logger...")
         logger.info("Setting up Aim logger...")
         aim_logger = AimLogger(
-            repo="aim://aim-server-lrg.matdmiller.com",  # or None, to use the default location
+            repo="aim://aim-server-lrg.matdmiller.com",
             experiment_name='mnist_test5',
-            system_tracking_interval=10,
+            system_tracking_interval=None,  # Disable system tracking
+            capture_terminal_logs=True,
         )
 
         device = 'gpu' if torch.cuda.is_available() else 'cpu'
@@ -155,7 +156,8 @@ def main():
         if aim_logger and aim_logger._run:
             print("Cleaning up Aim resources...")
             logger.info("Cleaning up Aim resources...")
-            aim_logger.close()
+            aim_logger.run.finalize()  # First finalize the run
+            aim_logger.close()  # Then close the logger
 
 if __name__ == '__main__':
     main()
