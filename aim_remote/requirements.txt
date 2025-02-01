@@ -1,0 +1,3 @@
+python-fasthtml==0.12.0
+fastcore==1.7.28
+git+https://github.com/matdmiller/aim.git@release/3.27.x
