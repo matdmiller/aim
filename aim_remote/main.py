@@ -4,11 +4,13 @@ from fasthtml.common import *
 from pathlib import Path
 import uuid, subprocess, shutil
 from datetime import datetime
-
+import os
 
 # Setup paths
-UPLOAD_DIR = Path('./upload')
-AIM_REPO = Path('./.aim')
+UPLOAD_DIR = Path(os.getenv('UPLOAD_DIR', './upload'))
+AIM_REPO = Path(os.getenv('AIM_REPO', './.aim'))
+AIM_REMOTE_PORT = int(os.getenv('AIM_REMOTE_PORT', 8000))
+
 UPLOAD_DIR.mkdir(exist_ok=True)
 
 if not AIM_REPO.exists():
@@ -114,4 +116,4 @@ def get():
 
 
 start_processor()
-serve(port=5002)
+serve(port=AIM_REMOTE_PORT)
