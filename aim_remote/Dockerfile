@@ -18,12 +18,13 @@ COPY requirements.txt .
 RUN pip install -r requirements.txt
 
 # Create directories with appropriate permissions
-RUN mkdir -p /data/upload /data/.aim && \
+RUN mkdir -p /data/upload /data/aim && \
     chown -R appuser:appuser /data
 
 # Copy application code
 COPY . .
-RUN chown -R appuser:appuser /app
+RUN chown -R appuser:appuser /app && \
+    chmod -R 755 /app
 
 # Switch to non-root user
 USER appuser
