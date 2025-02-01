@@ -6,7 +6,7 @@ import shutil, httpx
 from datetime import datetime
 
 def upload_repo():
-    server_url = 'http://localhost:5002/upload'
+    # server_url = 'http://localhost:5002/upload'
     # server_url = 'https://aim-upload-lrg.matdmiller.com/upload'
     repo_path = Path('.aim')
     if not repo_path.exists(): raise ValueError(f"AIM repo not found at {repo_path}")
@@ -17,7 +17,7 @@ def upload_repo():
     shutil.make_archive(str(zip_filepath.with_suffix('')), 'zip', str(repo_path))
 
     with open(zip_filepath, 'rb') as f:
-        response = httpx.post(server_url, files={'file': (upload_filename, f)}, timeout=600)
+        response = httpx.post(server_url, files={'file': (upload_filename, f)}, timeout=1200)
         response.raise_for_status()
     print(f'File upload: {upload_filename} success!\nHTTP RESPONSE:\n{response.text}')
 
@@ -25,7 +25,7 @@ def upload_repo():
 #### END UPLOAD REPO FUNCTION ####
 from aim import Run
 
-run = Run(repo='.aim', experiment='test exp') ### Set the repo location to the .aim directory in the current folder
+run = Run(repo='.aim', experiment='aim_remote_test') ### Set the repo location to the .aim directory in the current folder
 
 run["hparams"] = {
     "learning_rate": 0.001,
