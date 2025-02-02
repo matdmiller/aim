@@ -7,6 +7,7 @@ from datetime import datetime
 
 def upload_repo():
     # server_url = 'http://localhost:5002/upload'
+    server_url = 'http://192.168.11.20:8000/upload'
     # server_url = 'https://aim-upload-lrg.matdmiller.com/upload'
     repo_path = Path('.aim')
     if not repo_path.exists(): raise ValueError(f"AIM repo not found at {repo_path}")
