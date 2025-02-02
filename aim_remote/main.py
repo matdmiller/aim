@@ -16,7 +16,7 @@ UPLOAD_DIR.mkdir(exist_ok=True)
 if not AIM_REPO.exists():
     print(subprocess.check_call('aim init'.split()))
 
-app, rt = fast_app()
+app, rt = fast_app(key_fname=os.environ['SESSKEY_FNAME'])
 
 uploads = queue.Queue()
 running = True
