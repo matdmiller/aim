@@ -38,4 +38,4 @@ VOLUME /data/sesskey
 CMD ["python", "main.py"]
 
 # Example Docker run command
-# docker run -d -u $(id -u):$(id -g) -p 8000:8000 -v $(pwd)/upload:/data/upload -v $(pwd)/.aim:/data/.aim -v $(pwd)/sesskey:/data/sesskey aim_remote
+# docker run -d -p 8000:8000 -v $(pwd)/upload:/data/upload -v $(pwd)/.aim:/data/.aim -v $(pwd)/sesskey:/data/sesskey aim_remote
