@@ -17,6 +17,10 @@ RUN pip install -r requirements.txt
 # Copy application code
 COPY . .
 
+RUN chmod -R 555 /app && \
+    chmod -R 555 /usr/local/lib/python* && \
+    chmod -R 555 /usr/local/bin
+
 # Set environment variables
 ENV UPLOAD_DIR=/data/upload
 ENV AIM_REPO=/data/.aim
