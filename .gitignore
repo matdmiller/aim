@@ -5,6 +5,7 @@ aim_remote/.aim/
 aim_remote/upload/
 aim_remote/test/.aim/
 aim_remote/test/aim_repo.zip
+**/.env
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

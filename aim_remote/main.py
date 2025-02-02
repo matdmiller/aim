@@ -67,6 +67,8 @@ async def post(file: UploadFile):
         upload_path.mkdir()
         content = await file.read()
         filename = file.filename
+        if not (filename.startswith('aim_remote') and filename.endswith('.zip')):
+            raise Exception(f"Invalid filename: {filename}")
         zip_path = upload_path/filename
         zip_path.write_bytes(content)
         with (UPLOAD_DIR/'upload.log').open('a') as f:
@@ -84,7 +86,7 @@ def get():
     global running
     running = False
     if processor_thread:
-        processor_thread.join(timeout=10)  # Wait up to 2 seconds for clean shutdown
+        processor_thread.join(timeout=10)  # Wait up to 10 seconds for clean shutdown
     return "Shutting down processor..."
 
 @rt('/upload_log')

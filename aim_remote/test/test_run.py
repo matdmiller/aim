@@ -2,13 +2,16 @@
 
 #### UPLOAD REPO FUNCTION ####
 from pathlib import Path
-import shutil, httpx
+import shutil, httpx, os, dotenv
 from datetime import datetime
+
+dotenv.load_dotenv()
+AIM_CLIENT_REQUEST_HEADERS = os.environ['AIM_CLIENT_REQUEST_HEADERS']
 
 def upload_repo():
     # server_url = 'http://localhost:5002/upload'
-    server_url = 'http://192.168.11.20:8000/upload'
-    # server_url = 'https://aim-upload-lrg.matdmiller.com/upload'
+    # server_url = 'http://192.168.11.20:8000/upload'
+    server_url = 'https://aim-upload-lrg.matdmiller.com/upload'
     repo_path = Path('.aim')
     if not repo_path.exists(): raise ValueError(f"AIM repo not found at {repo_path}")
     zip_filepath = repo_path.resolve().parent/'aim_repo.zip'
@@ -18,7 +21,7 @@ def upload_repo():
     shutil.make_archive(str(zip_filepath.with_suffix('')), 'zip', str(repo_path))
 
     with open(zip_filepath, 'rb') as f:
-        response = httpx.post(server_url, files={'file': (upload_filename, f)}, timeout=1200)
+        response = httpx.post(server_url, files={'file': (upload_filename, f)}, headers=AIM_CLIENT_REQUEST_HEADERS, timeout=1200)
         response.raise_for_status()
     print(f'File upload: {upload_filename} success!\nHTTP RESPONSE:\n{response.text}')
 

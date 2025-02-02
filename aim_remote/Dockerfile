@@ -17,6 +17,7 @@ RUN pip install -r requirements.txt
 # Copy application code
 COPY . .
 
+# Set read-only permissions for application code and Python
 RUN chmod -R 555 /app && \
     chmod -R 555 /usr/local/lib/python* && \
     chmod -R 555 /usr/local/bin
