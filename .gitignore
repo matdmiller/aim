@@ -3,8 +3,8 @@
 .sesskey
 aim_remote/.aim/
 aim_remote/upload/
-aim_remote/test/.aim/
-aim_remote/test/aim_repo.zip
+aim_remote/example/.aim/
+aim_remote/example/aim_repo.zip
 **/.env
 
 # Byte-compiled / optimized / DLL files
